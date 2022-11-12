@@ -11,4 +11,4 @@ Inspirational git account: https://github.com/GSA
 This work is in the public domain in the United States because it was published in the United States between 1927 and 1977, inclusive, without a copyright notice.
 <br>
 <hr></hr>
-<img src="https://raw.githubusercontent.com/nazar-chepliaka/en-git-documentation/main/attachments/screenshots/photo_2022-11-11_22-56-48.jpg">
+<img width="300" src="https://raw.githubusercontent.com/nazar-chepliaka/en-git-documentation/main/attachments/screenshots/photo_2022-11-11_22-56-48.jpg">
