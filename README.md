@@ -4,7 +4,8 @@
 
 Ispirational video: https://youtu.be/4b33NTAuF5E <br>
 Inspirational people: https://github.com/pmndrs <br>
-Inspirational git account: https://github.com/GSA
+Inspirational git account: https://github.com/GSA <br>
+Inspirational YouTube channel: https://www.youtube.com/c/JavaScriptMastery
 
 <hr></hr>
 
