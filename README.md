@@ -12,6 +12,7 @@ Inspirational YouTube channel: https://www.youtube.com/c/JavaScriptMastery
 This work is in the public domain in the United States because it was published in the United States between 1927 and 1977, inclusive, without a copyright notice.
 <br>
 <hr></hr>
-Promo: https://youtu.be/pBy1zgt0XPc
+Promo: https://youtu.be/pBy1zgt0XPc <br>
+Info: https://www.loc.gov/collections/web-cultures-web-archive/ <br>
 
 <img width="300" src="https://raw.githubusercontent.com/nazar-chepliaka/en-git-documentation/main/attachments/screenshots/photo_2022-11-11_22-56-48.jpg">
