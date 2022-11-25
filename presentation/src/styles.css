@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000;
+}
+
+h2 {
+  color:#ffffff;
+}
+
+video {
+  height:auto;width:550px;
+}

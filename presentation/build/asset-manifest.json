@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/en-git-documentation/presentation/build/static/css/main.1e3566e3.css",
+    "main.js": "/en-git-documentation/presentation/build/static/js/main.bc5d7f6c.js",
+    "index.html": "/en-git-documentation/presentation/build/index.html",
+    "main.1e3566e3.css.map": "/en-git-documentation/presentation/build/static/css/main.1e3566e3.css.map",
+    "main.bc5d7f6c.js.map": "/en-git-documentation/presentation/build/static/js/main.bc5d7f6c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1e3566e3.css",
+    "static/js/main.bc5d7f6c.js"
+  ]
+}
