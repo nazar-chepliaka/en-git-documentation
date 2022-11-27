@@ -3,174 +3,215 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useCursor, OrbitControls, Html, useAspect, useVideoTexture, useTexture, MeshReflectorMaterial, Text } from '@react-three/drei'
 import * as THREE from 'three';
 
-function Box() {
-  const [size, set] = useState(0.5)
-  return (
-  <group>
-    <boxHelper args={[new THREE.Mesh( new THREE.BoxGeometry( 2, 2, 2 ) )]} >
-      <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    
-    <mesh position={[-1, -1, -1]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[50, 50]} />
-        <MeshReflectorMaterial
-          blur={[300, 100]}
-          resolution={1024}
-          mixBlur={0}
-          mixStrength={40}
-          roughness={1}
-          depthScale={1.2}
-          minDepthThreshold={0}
-          maxDepthThreshold={1.4}
-          color="#090909"
-          metalness={0.5}
-        />
-      </mesh>
-  </group>
-  )
-}
-
 function ClippingPlane() {
-    const { gl } = useThree();
-    gl.clippingPlanes = Object.freeze( [] );
-    gl.localClippingEnabled = true;
-    return <></>;
-  }
+  const { gl } = useThree();
+  gl.clippingPlanes = Object.freeze( [] );
+  gl.localClippingEnabled = true;
+  return <></>;
+}
 
-function BoxWireframe() {
-  const [size, set] = useState(0.5)
+function ComposedBox(args) {
+
+/*  let cube_size = 1;
+  let lines_size = 0.05;
+
+  let start_pos_x = 0;
+  let start_pos_y = 0;
+  let start_pos_z = 0;*/
+
+  let cube_size = args.args[1];
+  let lines_size = args.args[2];
+
+  let start_pos_x = args.args[0][0];
+  let start_pos_y = args.args[0][1];
+  let start_pos_z = args.args[0][2];
+
+  let cube_half_size = cube_size / 2;
+  let lines_half_size = lines_size / 2;
+
+
+  let lines_min_x = start_pos_x - cube_half_size + lines_half_size;
+  let lines_max_x = start_pos_x + cube_half_size - lines_half_size;
+
+  let lines_min_y = start_pos_y - cube_half_size + lines_half_size;
+  let lines_max_y = start_pos_y + cube_half_size - lines_half_size;
+
+  let lines_min_z = start_pos_z - cube_half_size + lines_half_size;
+  let lines_max_z = start_pos_z + cube_half_size - lines_half_size;
+
+  // width goes from position set in both directions simultaneously 
+  let line_n1_width = cube_size;
+  let line_n1_height = lines_size;
+  let line_n1_depth = lines_size;
+
+  let line_n1_pos_x = start_pos_x;
+  let line_n1_pos_y = lines_min_y;
+  let line_n1_pos_z = lines_min_z;
+
+
+  let line_n2_width = lines_size;
+  let line_n2_height = cube_size;
+  let line_n2_depth = lines_size;
+
+  let line_n2_pos_x = lines_min_x;
+  let line_n2_pos_y = start_pos_y;
+  let line_n2_pos_z = lines_min_z;
+
+
+  let line_n3_width = lines_size;
+  let line_n3_height = lines_size;
+  let line_n3_depth = cube_size;
+
+  let line_n3_pos_x = lines_min_x;
+  let line_n3_pos_y = lines_min_y;
+  let line_n3_pos_z = start_pos_z;
+
+
+
+
+  let line_n4_width = cube_size;
+  let line_n4_height = lines_size;
+  let line_n4_depth = lines_size;
+
+  let line_n4_pos_x = start_pos_x;
+  let line_n4_pos_y = lines_min_y;
+  let line_n4_pos_z = lines_max_z;
+
+
+  let line_n5_width = lines_size;
+  let line_n5_height = cube_size;
+  let line_n5_depth = lines_size;
+
+  let line_n5_pos_x = lines_max_x;
+  let line_n5_pos_y = start_pos_y;
+  let line_n5_pos_z = lines_max_z;
+
+
+  let line_n6_width = lines_size;
+  let line_n6_height = lines_size;
+  let line_n6_depth = cube_size;
+
+  let line_n6_pos_x = lines_max_x;
+  let line_n6_pos_y = lines_min_y;
+  let line_n6_pos_z = start_pos_z;
+
+
+
+
+  let line_n7_width = cube_size;
+  let line_n7_height = lines_size;
+  let line_n7_depth = lines_size;
+
+  let line_n7_pos_x = start_pos_x;
+  let line_n7_pos_y = lines_max_y;
+  let line_n7_pos_z = lines_min_z;
+
+
+  let line_n8_width = lines_size;
+  let line_n8_height = cube_size;
+  let line_n8_depth = lines_size;
+
+  let line_n8_pos_x = lines_max_x;
+  let line_n8_pos_y = start_pos_y;
+  let line_n8_pos_z = lines_min_z;
+
+
+  let line_n9_width = lines_size;
+  let line_n9_height = lines_size;
+  let line_n9_depth = cube_size;
+
+  let line_n9_pos_x = lines_max_x;
+  let line_n9_pos_y = lines_max_y;
+  let line_n9_pos_z = start_pos_z;
+
+
+
+
+  let line_n10_width = cube_size;
+  let line_n10_height = lines_size;
+  let line_n10_depth = lines_size;
+
+  let line_n10_pos_x = start_pos_x;
+  let line_n10_pos_y = lines_max_y;
+  let line_n10_pos_z = lines_max_z;
+
+
+  let line_n11_width = lines_size;
+  let line_n11_height = cube_size;
+  let line_n11_depth = lines_size;
+
+  let line_n11_pos_x = lines_min_x;
+  let line_n11_pos_y = start_pos_y;
+  let line_n11_pos_z = lines_max_z;
+
+
+  let line_n12_width = lines_size;
+  let line_n12_height = lines_size;
+  let line_n12_depth = cube_size;
+
+  let line_n12_pos_x = lines_min_x;
+  let line_n12_pos_y = lines_max_y;
+  let line_n12_pos_z = start_pos_z;
+
   return (
-    <mesh position={[0, 0, 0]}>
-      <boxBufferGeometry args={[1, 1, 1]} />
-      <meshPhongMaterial wireframe />
+  <group position={[start_pos_x, start_pos_y, start_pos_z]}>
+    <mesh position={[line_n1_pos_x, line_n1_pos_y, line_n1_pos_z]}>
+       <boxGeometry args={[line_n1_width, line_n1_height, line_n1_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
     </mesh>
-  )
-}
+    <mesh position={[line_n2_pos_x, line_n2_pos_y, line_n2_pos_z]}>
+       <boxGeometry args={[line_n2_width, line_n2_height, line_n2_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
+    <mesh position={[line_n3_pos_x, line_n3_pos_y, line_n3_pos_z]}>
+       <boxGeometry args={[line_n3_width, line_n3_height, line_n3_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
 
 
-function Boxes() {
-  const big_geometry = new THREE.BufferGeometry();
-
-const big_vertices = new Float32Array([
-  -0.5, -0.5, 0.5,
-  -0.5,  0.5, 0.5, 
-  0.5, 0.5,  0.5,
-  0.5, -0.5,  0.5,
-  -0.5, -0.5,  0.5,
-  -0.5, -0.5,  -0.5,
-  0.5, -0.5,  -0.5,
-  0.5, -0.5,  0.5,
-  0.5, 0.5,  0.5,
-  0.5, 0.5,  -0.5,
-  0.5, -0.5,  -0.5,
-  0.5, 0.5,  -0.5,
-  -0.5, 0.5,  -0.5,
-  -0.5, -0.5,  -0.5,
-  -0.5, 0.5,  -0.5,
-  -0.5, 0.5,  0.5,
-]);
-
-big_geometry.setAttribute('position', new THREE.BufferAttribute(big_vertices, 3));
-
-  const small_geometry = new THREE.BufferGeometry();
-
-const small_vertices = new Float32Array([
-  -0.2, -0.2, 0.2,
-  -0.2,  0.2, 0.2, 
-  0.2, 0.2,  0.2,
-  0.2, -0.2,  0.2,
-  -0.2, -0.2,  0.2,
-  -0.2, -0.2,  -0.2,
-  0.2, -0.2,  -0.2,
-  0.2, -0.2,  0.2,
-  0.2, 0.2,  0.2,
-  0.2, 0.2,  -0.2,
-  0.2, -0.2,  -0.2,
-  0.2, 0.2,  -0.2,
-  -0.2, 0.2,  -0.2,
-  -0.2, -0.2,  -0.2,
-  -0.2, 0.2,  -0.2,
-  -0.2, 0.2,  0.2,
-]);
-
-small_geometry.setAttribute('position', new THREE.BufferAttribute(small_vertices, 3));
-
-  return (
-    <group>
-      <group position={[0, 0, 0]}>
-        <line geometry={big_geometry}>
-          <lineBasicMaterial attach="material" color={'#60cbd7'} linewidth={10} linecap={'round'} linejoin={'round'} />
-        </line>
-      </group>
-      <group position={[0, 0.72, 0.3]}>
-        <line geometry={small_geometry}>
-          <lineBasicMaterial attach="material" color={'#60cbd7'} linewidth={10} linecap={'round'} linejoin={'round'} />
-        </line>
-      </group>
-    </group>
-  )
-}
-
-function ComposedBox() {
-  return (
-  <group position={[-1, -0.5, -0.5]}>
-    <boxHelper>
-        <mesh position={[1, 1, 1]} args={[new THREE.BoxGeometry( 1, 0.1, 0.1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    <boxHelper>
-        <mesh position={[0.5, 0.5, 1]} args={[new THREE.BoxGeometry( 0.1, 1, 0.1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    <boxHelper>
-        <mesh position={[1.5, 0.5, 1]} args={[new THREE.BoxGeometry( 0.1, 1, 0.1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    <boxHelper>
-        <mesh position={[1, 0, 1]} args={[new THREE.BoxGeometry( 1, 0.1, 0.1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
+    <mesh position={[line_n4_pos_x, line_n4_pos_y, line_n4_pos_z]}>
+       <boxGeometry args={[line_n4_width, line_n4_height, line_n4_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
+    <mesh position={[line_n5_pos_x, line_n5_pos_y, line_n5_pos_z]}>
+       <boxGeometry args={[line_n5_width, line_n5_height, line_n5_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
+    <mesh position={[line_n6_pos_x, line_n6_pos_y, line_n6_pos_z]}>
+       <boxGeometry args={[line_n6_width, line_n6_height, line_n6_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
 
 
-
-    <boxHelper>
-        <mesh position={[1, 1, 0]} args={[new THREE.BoxGeometry( 1, 0.1, 0.1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    <boxHelper>
-        <mesh position={[0.5, 0.5, 0]} args={[new THREE.BoxGeometry( 0.1, 1, 0.1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    <boxHelper>
-        <mesh position={[1.5, 0.5, 0]} args={[new THREE.BoxGeometry( 0.1, 1, 0.1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    <boxHelper>
-        <mesh position={[1, 0, 0]} args={[new THREE.BoxGeometry( 1, 0.1, 0.1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
+    <mesh position={[line_n7_pos_x, line_n7_pos_y, line_n7_pos_z]}>
+       <boxGeometry args={[line_n7_width, line_n7_height, line_n7_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
+    <mesh position={[line_n8_pos_x, line_n8_pos_y, line_n8_pos_z]}>
+       <boxGeometry args={[line_n8_width, line_n8_height, line_n8_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
+    <mesh position={[line_n9_pos_x, line_n9_pos_y, line_n9_pos_z]}>
+       <boxGeometry args={[line_n9_width, line_n9_height, line_n9_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
 
 
-    <boxHelper>
-        <mesh position={[0.5, 0, 0.5]} args={[new THREE.BoxGeometry( 0.1, 0.1, 1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    <boxHelper>
-        <mesh position={[0.5, 1, 0.5]} args={[new THREE.BoxGeometry( 0.1, 0.1, 1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    <boxHelper>
-        <mesh position={[1.5, 0, 0.5]} args={[new THREE.BoxGeometry( 0.1, 0.1, 1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
-    <boxHelper>
-        <mesh position={[1.5, 1, 0.5]} args={[new THREE.BoxGeometry( 0.1, 0.1, 1 )]} />
-        <meshBasicMaterial color={0x8ae2ec} />
-    </boxHelper>
+    <mesh position={[line_n10_pos_x, line_n10_pos_y, line_n10_pos_z]}>
+       <boxGeometry args={[line_n10_width, line_n10_height, line_n10_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
+    <mesh position={[line_n11_pos_x, line_n11_pos_y, line_n11_pos_z]}>
+       <boxGeometry args={[line_n11_width, line_n11_height, line_n11_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
+    <mesh position={[line_n12_pos_x, line_n12_pos_y, line_n12_pos_z]}>
+       <boxGeometry args={[line_n12_width, line_n12_height, line_n12_depth]} />
+       <meshStandardMaterial color={0x8ae2ec} />
+    </mesh>
   </group>
   )
 }
-
 
 
 function IcosahedronWireframe() {
@@ -185,7 +226,6 @@ function IcosahedronWireframe() {
 }
 
 
-
 export default function App() {
   return (
     <Canvas dpr={[1, 2]} camera={{ fov: 25, position: [0, 1, 10] }}>
@@ -194,7 +234,8 @@ export default function App() {
       <pointLight position={[-10, -10, -10]} />
       <ClippingPlane />
       
-      <ComposedBox />
+      <ComposedBox args={[[0, 0, 0], 1, 0.06]} />
+      <ComposedBox args={[[0.375, 0.125, 0], 0.5, 0.04]} />
 
       <IcosahedronWireframe />
       <OrbitControls />
