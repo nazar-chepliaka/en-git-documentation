@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/nazar-chepliaka/en-git-documentation/main/attachments/gif/teaser.gif">
+<img src="https://raw.githubusercontent.com/nazar-chepliaka/en-git-documentation/main/attachments/gif/teaser.gif" title="seems to be git-tower video">
 
 # en-git-documentation
 
